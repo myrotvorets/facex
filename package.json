@@ -37,5 +37,13 @@
     "iconv-lite": "^0.6.1",
     "node-fetch": "^2.6.0",
     "sharp": "^0.25.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myrotvorets/facex.git"
+  },
+  "bugs": {
+    "url": "https://github.com/myrotvorets/facex/issues"
+  },
+  "homepage": "https://github.com/myrotvorets/facex#readme"
 }
