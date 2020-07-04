@@ -7,7 +7,7 @@ export class CapturedFace {
         this._e = x;
     }
 
-    public get index(): number {
+    public get faceID(): number {
         return this._e.par1;
     }
 
