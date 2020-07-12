@@ -5,6 +5,7 @@ import util from 'util';
 import debug from 'debug';
 import { RawResponse, Response } from './response';
 import { responseFactory } from './responsefactory';
+import { BadImageError, HttpError, BadResponseError } from './exceptions';
 
 export interface RequestPayload {
     client_id: string;
@@ -93,30 +94,43 @@ export class ClientBase {
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP Error ${response.status} ${response.statusText} (${await response.text()})`);
+            const err = new HttpError(response);
+            try {
+                err.body = await response.text();
+            } catch (e) {
+                // Do nothing
+            }
+
+            throw err;
         }
 
         const text = await response.text();
         dbgll('RECV:', text);
+
+        let body: RawResponse;
         try {
-            const body: RawResponse = JSON.parse(text);
-            const ret = responseFactory(body) as R;
-            dbg(ret);
-            return ret;
+            body = JSON.parse(text);
         } catch (e) {
-            e.body = text;
-            throw e;
+            throw new BadResponseError(text);
         }
+
+        const ret = responseFactory(body) as R;
+        dbg(ret);
+        return ret;
     }
 
     protected async _prepareFile(s: Buffer | string | NodeJS.ReadableStream): Promise<string> {
         let img: sharp.Sharp;
 
-        if (typeof s === 'object' && 'pipe' in s) {
-            img = sharp({ failOnError: false, sequentialRead: true });
-            s.pipe(img);
-        } else {
-            img = sharp(s, { failOnError: false, sequentialRead: true });
+        try {
+            if (typeof s === 'object' && 'pipe' in s) {
+                img = sharp({ failOnError: false, sequentialRead: true });
+                s.pipe(img);
+            } else {
+                img = sharp(s, { failOnError: false, sequentialRead: true });
+            }
+        } catch (e) {
+            throw new BadImageError((e as Error).message);
         }
 
         const metadata = await img.metadata();
