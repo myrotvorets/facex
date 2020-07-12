@@ -121,6 +121,7 @@ export class ClientBase {
 
     protected async _prepareFile(s: Buffer | string | NodeJS.ReadableStream): Promise<string> {
         let img: sharp.Sharp;
+        let metadata: sharp.Metadata;
 
         try {
             if (typeof s === 'object' && 'pipe' in s) {
@@ -129,11 +130,12 @@ export class ClientBase {
             } else {
                 img = sharp(s, { failOnError: false, sequentialRead: true });
             }
+
+            metadata = await img.metadata();
         } catch (e) {
             throw new BadImageError((e as Error).message);
         }
 
-        const metadata = await img.metadata();
         const isJPEG = metadata.format === 'jpeg';
         const sf = metadata.chromaSubsampling || '';
         const isProgressive = !!metadata.isProgressive;
