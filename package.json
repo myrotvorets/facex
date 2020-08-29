@@ -31,7 +31,9 @@
   "dependencies": {
     "@myrotvorets/facex-base": "^1.0.7",
     "@myrotvorets/facex-image-processor-sharp": "^1.0.8",
-    "@myrotvorets/facex-transport-node-fetch": "^1.0.6"
+    "@myrotvorets/facex-transport-node-fetch": "^1.0.6",
+    "node-fetch": "^2.6.0",
+    "sharp": "^0.26.0"
   },
   "repository": {
     "type": "git",
