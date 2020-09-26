@@ -19,7 +19,7 @@
   "author": "Myrotvorets <support@myrotvorets.center> (https://myrotvorets.center/)",
   "license": "MIT",
   "devDependencies": {
-    "@myrotvorets/eslint-config-myrotvorets-ts": "^1.0.1",
+    "@myrotvorets/eslint-config-myrotvorets-ts": "^1.0.2",
     "@types/node": "^14.11.2",
     "@typescript-eslint/eslint-plugin": "^4.2.0",
     "eslint": "^7.9.0",
@@ -29,7 +29,7 @@
     "typescript": "^4.0.3"
   },
   "dependencies": {
-    "@myrotvorets/facex-base": "^1.1.0",
+    "@myrotvorets/facex-base": "^1.1.2",
     "@myrotvorets/facex-image-processor-sharp": "^1.0.12",
     "@myrotvorets/facex-transport-node-fetch": "^1.1.0",
     "node-fetch": "^2.6.1",
