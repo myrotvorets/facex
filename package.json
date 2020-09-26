@@ -30,8 +30,8 @@
   },
   "dependencies": {
     "@myrotvorets/facex-base": "^1.1.0",
-    "@myrotvorets/facex-image-processor-sharp": "^1.0.10",
-    "@myrotvorets/facex-transport-node-fetch": "^1.0.7",
+    "@myrotvorets/facex-image-processor-sharp": "^1.0.12",
+    "@myrotvorets/facex-transport-node-fetch": "^1.1.0",
     "node-fetch": "^2.6.1",
     "sharp": "^0.26.1"
   },

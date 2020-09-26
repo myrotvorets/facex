@@ -1,4 +1,4 @@
-import { SvcClient, FaceXRequestBuilder, DefaultGuidGenerator } from '@myrotvorets/facex-base';
+import { DefaultGuidGenerator, FaceXRequestBuilder, SvcClient } from '@myrotvorets/facex-base';
 import { TransportFetch } from '@myrotvorets/facex-transport-node-fetch';
 import { ImageProcessorSharp } from '@myrotvorets/facex-image-processor-sharp';
 
