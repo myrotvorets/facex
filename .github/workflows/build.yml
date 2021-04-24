@@ -25,6 +25,7 @@ jobs:
         uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ matrix.node }}
+          registry-url: https://npm.pkg.github.com
 
       - name: Update npm
         run: npm i -g npm@latest
@@ -47,3 +48,8 @@ jobs:
 
       - name: Run postinstall scripts
         run: npm rebuild && npm run prepare --if-present
+
+      - name: Run tests
+        run: npm test
+        env:
+          COLLECT_COVERAGE: "0"
