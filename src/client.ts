@@ -1,5 +1,5 @@
 import { Client, DefaultGuidGenerator, FaceXRequestBuilder } from '@myrotvorets/facex-base';
-import { TransportFetch } from '@myrotvorets/facex-transport-node-fetch';
+import { TransportFetch } from '@myrotvorets/facex-transport-fetch-h2';
 import { ImageProcessorSharp } from '@myrotvorets/facex-image-processor-sharp';
 
 export class FaceXClient extends Client {
