@@ -21,7 +21,7 @@ jobs:
     if: github.event_name == 'release' || github.event.inputs.npm == 'yes' || github.event.inputs.gpr == 'yes'
     steps:
       - name: Checkout source
-        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2.4.0
+        uses: actions/checkout@dcd71f646680f2efd8db4afa5ad64fdcba30e748 # tag=v3.0.1
         with:
           ref: ${{ github.event.release.tag_name }}
 
@@ -54,7 +54,7 @@ jobs:
         run: npm pack
 
       - name: Save tarball
-        uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # renovate: tag=v2
+        uses: actions/upload-artifact@6673cd052c4cd6fcf4b4e6e60ea986c889389535 # tag=v3
         with:
           name: package
           path: "*.tgz"
@@ -90,7 +90,7 @@ jobs:
 
       - name: Download tarball
         if: github.event.inputs[matrix.registry] == 'yes' || github.event_name == 'release'
-        uses: actions/download-artifact@f023be2c48cc18debc3bacd34cb396e0295e2869 # renovate: tag=v2
+        uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741 # tag=v3
         with:
           name: package
 
