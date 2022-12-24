@@ -14,10 +14,6 @@ jobs:
   audit-npm:
     name: NPM Audit
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node_version: ["14"]
-
     steps:
       - name: Checkout
         uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0
@@ -25,7 +21,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516 # tag=v3.5.1
         with:
-          node-version: ${{ matrix.node_version }}
+          node-version: lts/*
 
       - name: Run audit
         run: npm audit --production
@@ -33,10 +29,6 @@ jobs:
   audit-retire:
     name: RetireJS Check
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node_version: ["14"]
-
     steps:
       - name: Checkout
         uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0
@@ -46,19 +38,9 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516 # tag=v3.5.1
         with:
-          node-version: ${{ matrix.node_version }}
+          node-version: lts/*
           registry-url: https://npm.pkg.github.com
-
-      - name: Cache node modules
-        uses: actions/cache@c1a5de879eb890d062a85ee0252d6036480b1fe2 # v3.2.1
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node_version }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node_version }}-
-            ${{ runner.os }}-build-${{ env.cache-name }}-
+          cache: npm
 
       - name: Install dependencies
         run: npm ci --ignore-scripts
