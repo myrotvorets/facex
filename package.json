@@ -28,10 +28,10 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@myrotvorets/facex-base": "^2.0.1",
+    "@myrotvorets/facex-base": "^2.1.0",
     "@myrotvorets/facex-image-processor-sharp": "^1.1.10",
     "@myrotvorets/facex-transport-fetch-h2": "^2.2.1",
-    "sharp": "^0.31.0"
+    "sharp": "^0.32.0"
   },
   "repository": {
     "type": "git",
