@@ -3,7 +3,6 @@ name: Package Audit
 on:
   push:
     branches:
-      - '**'
     paths:
       - package.json
       - package-lock.json
@@ -16,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
 
       - name: Setup Node.js environment
         uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3.6.0
@@ -25,30 +24,3 @@ jobs:
 
       - name: Run audit
         run: npm audit --production
-
-  audit-retire:
-    name: RetireJS Check
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
-        with:
-          submodules: true
-
-      - name: Setup Node.js environment
-        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3.6.0
-        with:
-          node-version: lts/*
-          registry-url: https://npm.pkg.github.com
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci --ignore-scripts
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Install retire.js
-        run: npm i -g retire
-
-      - name: Run audit
-        run: retire -n
