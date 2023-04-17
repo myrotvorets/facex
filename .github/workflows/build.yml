@@ -13,8 +13,8 @@ jobs:
     strategy:
       matrix:
         node:
-          - '14'
-          - '16'
+          - '18'
+          - '19'
     name: Build and test (Node ${{ matrix.node }})
     steps:
       - name: Check out the code
