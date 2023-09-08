@@ -1,54 +1,28 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: Build and Test
 
 on:
   push:
     branches:
-      - '**'
+      - "**"
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   build:
+    name: Build and test (Node ${{ matrix.node.name }})
     runs-on: ubuntu-latest
     if: ${{ !contains(github.event.head_commit.message, '[ci skip]') || github.event_name == 'workflow_dispatch' }}
     strategy:
       matrix:
         node:
-          - '18'
-          - '19'
-    name: Build and test (Node ${{ matrix.node }})
+          - { name: Current,      version: current }
+          - { name: LTS,          version: lts/* }
+          - { name: Previous LTS, version: lts/-1 }
     steps:
-      - name: Check out the code
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
-
-      - name: Set up Node.js environment
-        uses: actions/setup-node@5e21ff4d9bc1a8cf6de233a3057d20ec6b3fb69d # v3.8.1
+      - name: Build and test
+        uses: myrotvorets/composite-actions/build-test-nodejs@master
         with:
-          node-version: ${{ matrix.node }}
-          registry-url: https://npm.pkg.github.com
-
-      - name: Update npm
-        run: npm i -g npm@latest
-
-      - name: Cache Node modules
-        uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8 # v3.3.1
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node }}-
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-
-      - name: Install dependencies
-        run: npm ci --ignore-scripts
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Run postinstall scripts
-        run: npm rebuild && npm run prepare --if-present
-
-      - name: Run tests
-        run: npm test
-        env:
-          COLLECT_COVERAGE: "0"
+          node-version: ${{ matrix.node.version }}
