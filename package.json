@@ -31,7 +31,7 @@
     "@myrotvorets/facex-base": "^2.3.1",
     "@myrotvorets/facex-image-processor-sharp": "^1.2.1",
     "@myrotvorets/facex-transport-fetch-h2": "^2.2.2",
-    "sharp": "^0.33.1"
+    "sharp": "^0.34.0"
   },
   "repository": {
     "type": "git",
