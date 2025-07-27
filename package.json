@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@myrotvorets/facex-base": "^2.3.1",
-    "@myrotvorets/facex-image-processor-sharp": "^1.2.1",
+    "@myrotvorets/facex-image-processor-sharp": "^1.3.0",
     "@myrotvorets/facex-transport-fetch-h2": "^2.2.2",
     "sharp": "^0.34.0"
   },
