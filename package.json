@@ -23,7 +23,7 @@
   "license": "MIT",
   "devDependencies": {
     "@myrotvorets/eslint-config-myrotvorets-ts": "^3.1.1",
-    "@types/node": "^25.5.0",
+    "@types/node": "^26.0.0",
     "eslint-formatter-gha": "^2.0.1",
     "typescript": "^5.9.3"
   },
